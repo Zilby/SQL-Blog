@@ -5,7 +5,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    L = ["One", "two"]
+    return render_template("home.html", l = L)
     
 """@app.route("/<name>")
 def pages(name = None):
@@ -15,5 +16,5 @@ def pages(name = None):
 
 if __name__=="__main__":
     app.debug=True
-    app.run(host="0.0.0.0",port=6000)
+    app.run(host="127.0.0.1",port=5000)
     app.run()
