@@ -17,6 +17,26 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
+def give_new_title(title,titles):
+    repeat=False
+    nums=['0','1','2','3','4','5','6','7','8','9']
+    for each in titles:
+        if(each==title):
+               repeat=True
+    if(repeat==False):
+        return title
+    else:
+        if(len(title)>3):
+            if(title[-2] in nums and title[-3]=='(' and title[-1]==')'):
+                base=ord('0')
+                number=ord(title[-2])-base
+                title=title[:-3]+"("+str(number+1)+")"
+                return give_new_title(title,titles)
+            else:
+                return give_new_title(title+"(1)",titles);
+        else:
+            return give_new_title(title+"(1)",titles)
+
 @app.route("/", methods=["GET","POST"])
 def home():
     g.conn = get_db()
@@ -27,6 +47,10 @@ def home():
     if ('title' in request.form and 'body' in request.form):
         title = request.form['title']
         body = request.form['body']
+        titles=[]
+        for each in c.execute('''SELECT title FROM blogs'''):
+            titles+=each
+        title=give_new_title(title,titles)
         c.execute("INSERT INTO blogs VALUES(?, ?, NULL)", (title, body,))
         g.conn.commit()
     
@@ -37,7 +61,7 @@ def home():
         L.append(p[0])
     g.conn.close()
     return render_template("home.html", l = L)
-    
+
 @app.route("/<title>", methods=["GET","POST"])
 def pages(title):
     g.conn = get_db()
@@ -63,4 +87,6 @@ def pages(title):
 if __name__=="__main__":    
     app.debug=True
     app.run(host="127.0.0.1",port=5678)
+
+
 
