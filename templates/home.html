@@ -2,7 +2,7 @@
 <body>
 <h1> SQL Blog </h1>
 {% for post in l %}
-<p> {{ post }} </p>
+<p> <a href = "/{{ post }}"> {{ post }}</a> </p>
 {% endfor %}
 
 <form action="" method="POST">

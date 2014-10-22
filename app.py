@@ -29,11 +29,11 @@ def home():
         q = "INSERT INTO blogs VALUES('%s', '%s')" % (title, body)
         c.execute(q)
         g.conn.commit()
-        q = "select * from blogs"
-        result = c.execute(q)
-        for r in result:
-            print r
-    L = ["One", "two"]
+    
+    L = []
+    posts = c.execute("select title from blogs")
+    for p in posts:
+        L.append(p[0])
     g.conn.close()
     return render_template("home.html", l = L)
     
@@ -43,9 +43,12 @@ def pages(title):
     c = g.conn.cursor()
     q = "select * from blogs where title == '%s'" % title#.replace("%20", " ")
     result = c.execute(q).fetchone()
-    title = result[0]
-    body = result[1]
-    return render_template("post.html", title=title, body=body)
+    if (result != None):
+        title = result[0]
+        body = result[1]
+        return render_template("post.html", title=title, body=body)
+    else:
+        return render_template("failure.html")
 
 if __name__=="__main__":    
     app.debug=True
