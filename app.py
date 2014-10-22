@@ -17,7 +17,14 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-def give_new_title(title,titles):
+
+#This function below prevents titles from being the same. 
+#eg: if the title "blogpost1" already exists"
+#it will become "blogpost1(1)
+#and if blogpost1(1) already exists
+#it will become blogpost1(2)
+
+def give_new_title(title,titles): 
     repeat=False
     nums=['0','1','2','3','4','5','6','7','8','9']
     for each in titles:
