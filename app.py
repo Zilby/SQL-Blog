@@ -23,6 +23,7 @@ def close_connection(exception):
 #it will become "blogpost1(1)
 #and if blogpost1(1) already exists
 #it will become blogpost1(2)
+#it has been implemented already, and has been tested.
 
 def give_new_title(title,titles): 
     repeat=False
