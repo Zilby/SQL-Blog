@@ -1,7 +1,0 @@
-<html><head> <title> SQL Blog </title> </head>
-<body>
-<h1> SQL Blog </h1>
-{ % for post in l % }
-<p> post </p>
-{ % endfor % }
-</body></html>
