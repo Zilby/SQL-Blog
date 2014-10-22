@@ -2,4 +2,15 @@
 <body>
 <h1> {{ title }} </h1>
 <h3> {{ body }} </h3>
+{% for c in comments %}
+{{ c }} <br>
+{% endfor %}
+<br>
+<hr>
+
+<form action="" method="POST">
+Comment:<br>
+<textarea name = "comment"> </textarea><br>
+<input type="submit">
+
 </body>

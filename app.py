@@ -21,32 +21,41 @@ def close_connection(exception):
 def home():
     g.conn = get_db()
     c = g.conn.cursor()
-    c.execute("CREATE TABLE IF NOT EXISTS blogs(title text, body text)")
+    c.execute("CREATE TABLE IF NOT EXISTS blogs(title text, body text, id INTEGER PRIMARY KEY)")
+    c.execute("CREATE TABLE IF NOT EXISTS comments(pid integer, comment text)")
     g.conn.commit()
     if ('title' in request.form and 'body' in request.form):
         title = request.form['title']
         body = request.form['body']
-        q = "INSERT INTO blogs VALUES('%s', '%s')" % (title, body)
-        c.execute(q)
+        c.execute("INSERT INTO blogs VALUES(?, ?, NULL)", (title, body,))
         g.conn.commit()
     
     L = []
     posts = c.execute("select title from blogs")
     for p in posts:
-        L.append(p[0])
+        L.append(u'%s' % p[0])
     g.conn.close()
     return render_template("home.html", l = L)
     
-@app.route("/<title>")
+@app.route("/<title>", methods=["GET","POST"])
 def pages(title):
     g.conn = get_db()
     c = g.conn.cursor()
-    q = "select * from blogs where title == '%s'" % title#.replace("%20", " ")
-    result = c.execute(q).fetchone()
+    x = c.execute("select * from blogs")
+    print x.fetchall()
+    x = c.execute("select * from comments")
+    print x.fetchall()
+
+    result = c.execute("select * from blogs where title == ?", (title,)).fetchone()
     if (result != None):
+        if ('comment' in request.form):
+            comment = request.form['comment']
+            c.execute("insert into comments values(?, ?)", (result[2], comment,))
+            g.conn.commit()
         title = result[0]
         body = result[1]
-        return render_template("post.html", title=title, body=body)
+        comments = c.execute("select comment from comments,blogs where blogs.id == comments.pid and blogs.title == ?", (title,)).fetchall()
+        return render_template("post.html", title=title, body=body, comments=[c[0] for c in comments])
     else:
         return render_template("failure.html")
 
