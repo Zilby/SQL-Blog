@@ -55,12 +55,13 @@ def home():
     if ('title' in request.form and 'body' in request.form):
         title = request.form['title']
         body = request.form['body']
-        titles=[]
-        for each in c.execute('''SELECT title FROM blogs'''):
-            titles+=each
-        title=give_new_title(title,titles)
-        c.execute("INSERT INTO blogs VALUES(?, ?, NULL)", (title, body,))
-        g.conn.commit()
+        if(title.replace(" ", "")!="" and body.replace(" ", "")!=""):
+            titles=[]
+            for each in c.execute('''SELECT title FROM blogs'''):
+                titles+=each
+            title=give_new_title(title,titles)
+            c.execute("INSERT INTO blogs VALUES(?, ?, NULL)", (title, body,))
+            g.conn.commit()
     
     L = []
     posts = c.execute('''SELECT title FROM blogs 
@@ -83,8 +84,9 @@ def pages(title):
     if (result != None):
         if ('comment' in request.form):
             comment = request.form['comment']
-            c.execute("insert into comments values(?, ?)", (result[2], comment,))
-            g.conn.commit()
+            if(comment.replace(" ", "")!=""):
+                c.execute("insert into comments values(?, ?)", (result[2], comment,))
+                g.conn.commit()
         title = result[0]
         body = result[1]
         comments = c.execute("select comment from comments,blogs where blogs.id == comments.pid and blogs.title == ?", (title,)).fetchall()
