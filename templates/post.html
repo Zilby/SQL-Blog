@@ -1,16 +1,59 @@
-<html> <head> <title> {{ title }} </title> </head>
-<body>
-<h1> {{ title }} </h1>
-<h3> {{ body }} </h3>
+<!doctype html>
+<html>
+  <head>
+    <meta charset = "utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> {{ title }} </title> 
+    
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+
+    <style> html, button, input, select, textarea, .pure-g[class *= "pure-u"]{font-family: Georgia, Times, "Times New Roman", serif;</style>
+  </head>
+  
+  <body>
+    <div class = "content pure-u-1">
+      <div class = "posts">
+	<section class="post">
+	  <header class="post-header" style ="margin-left: 50px;">
+	    <h1 class ="post-title"> {{ title }} </h1>
+	  </header>
+
+	  <div class="post-description" style ="margin-left: 90px;">
+	    <p> {{ body }} </p>
+	  </div>
+	</section>
+      </div>
+<br><br><hr>
+<div class="header" style="margin-left: 50px;">
+<h2>Comments</h2>
+</div>
 {% for c in comments %}
-{{ c }} <br>
+<div class = "content" style="margin-left: 90px;">
+<p>{{ c }}</p> <br>
+</div>
 {% endfor %}
 <br>
 <hr>
 
-<form action="" method="POST">
-Comment:<br>
-<textarea name = "comment"></textarea><br>
-<input type="submit">
+<form class ="pure-form pure-form-aligned" method="post">
+  <fieldset>
+    <div class="pure-control-group">
+      <label>Comment:</label>
+      <textarea name = "comment" placeholder="Your comment here..."></textarea>
+    </div>
+    <div class="pure-controls">
+      <button type ="submit" class="pure-button pure-button-primary">Submit</button>
+    </div>
+  </fieldset>
+</form>
 
+<div class ="footer">
+  <div class="pure-menu pure-menu-horizontal pure-menu-open">
+    <ul>
+      <li><a href="/">Home</a></li>
+    </ul>
+  </div>
+</div>
 </body>
+</html>
