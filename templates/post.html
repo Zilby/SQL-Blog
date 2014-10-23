@@ -20,10 +20,7 @@
 	<section class="post">
 	  <header class="post-header" style ="margin-left: 50px;">
 	    <h1 class ="post-title"> {{ title }} </h1>
-<<<<<<< HEAD
 	    <h4> Posted by: {{ name }} </h4>
-=======
->>>>>>> 3d81a8f2283d1a5c79c1ac4db4b2702c27a72bcd
 	  </header>
 
 	  <div class="post-description" style ="margin-left: 90px;">
@@ -35,15 +32,9 @@
 <div class="header" style="margin-left: 50px;">
 <h2>Comments</h2>
 </div>
-<<<<<<< HEAD
 {% for i in range(comments|length) %}
 <div class = "content" style="margin-left: 90px;">
 <p>{{ names[i] }}: {{ comments[i] }}</p> <br>
-=======
-{% for c in comments %}
-<div class = "content" style="margin-left: 90px;">
-<p>{{ c }}</p> <br>
->>>>>>> 3d81a8f2283d1a5c79c1ac4db4b2702c27a72bcd
 </div>
 {% endfor %}
 <br>
@@ -51,13 +42,10 @@
 
 <form class ="pure-form pure-form-aligned" method="post">
   <fieldset>
-<<<<<<< HEAD
     <div class = "pure-control-group">
       <label>Name:</label>
       <input name = "name" type = "text" placeholder = "Anonymous">
     </div>
-=======
->>>>>>> 3d81a8f2283d1a5c79c1ac4db4b2702c27a72bcd
     <div class="pure-control-group">
       <label>Comment:</label>
       <textarea name = "comment" placeholder="Your comment here..."></textarea>
