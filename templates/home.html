@@ -1,13 +1,40 @@
-<html><head> <title> SQL Blog </title> <!--<style type="text/css"> body, a:hover {cursor: url(http://ani.cursors-4u.net/cursors/cur-12/cur1103.ani), url(http://ani.cursors-4u.net/cursors/cur-12/cur1103.png), progress !important;}</style><a href="http://www.cursors-4u.com/cursor/2014/03/14/rainbow-pinwheel-pointer.html" target="_blank" title="Rainbow Pinwheel Pointer"><img src="http://cur.cursors-4u.net/cursor.png" border="0" alt="Rainbow Pinwheel Pointer" style="position:absolute; top: 0px; right: 0px;" /></a>-->
+<!doctype html>
+<html>
+  <head> 
+    <meta charset = "utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SQL Blog</title>
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+
+    <style> html, button, input, select, textarea, .pure-g[class *= "pure-u"]{font-family: Georgia, Times, "Times New Roman", serif;</style>
+    <!--<style type="text/css">body, a:hover {cursor: url(http://ani.cursors-4u.net/cursors/cur-12/cur1103.ani), url(http://ani.cursors-4u.net/cursors/cur-12/cur1103.png), progress !important;}</style><a href="http://www.cursors-4u.com/cursor/2014/03/14/rainbow-pinwheel-pointer.html" target="_blank" title="Rainbow Pinwheel Pointer"><img src="http://cur.cursors-4u.net/cursor.png" border="0" alt="Rainbow Pinwheel Pointer" style="position:absolute; top: 0px; right: 0px;" /></a>-->
 </head>
 
 <body>
-<h1> SQL Blog </h1>
-{% for post in l %}
-<p> <a href = "/{{ post }}"> {{ post }}</a> </p>
+<div id="main">
+  <div class = "header" style="margin-left: 130px;">
+      <h1> SQL Blog </h1>
+  </div>
+  {% for post in l %}
+<div class = "content" style="margin-left: 130px;">
+<p> <a href = "/{{ post }}"> {{ post }}</a> </p></div>
 {% endfor %}
-<form action="" method="POST">
-Title: <input type = "text" name = "title"><br>
-<textarea name = "body"></textarea><br>
-<input type="submit">
+
+<form class="pure-form pure-form-aligned" method="post">
+  <fieldset>
+    <div class = "pure-control-group">
+      <label>Title:</label>
+      <input name = "title" type = "text" placeholder = "Title">
+    </div>
+    <div class="pure-control-group">
+      <label>Post:</label>
+      <textarea name = "body" placeholder="Your post here..."></textarea>
+    </div>
+    <div class = "pure-controls">
+      <button type = "submit" class="pure-button pure-button-primary">Submit</button>
+    </div>
+  </fieldset>
+</form>
 </body></html>
