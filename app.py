@@ -64,8 +64,7 @@ def home():
             g.conn.commit()
     
     L = []
-    posts = c.execute('''SELECT title FROM blogs 
-    ORDER BY title;''')
+    posts = c.execute('''SELECT title FROM blogs ORDER BY title;''')
     for p in posts:
         L.append(p[0])
     g.conn.close()
